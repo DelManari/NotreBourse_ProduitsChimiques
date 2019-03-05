@@ -1,0 +1,106 @@
+﻿@model NotreBourse_ProduitsChimiques.Models.User
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/Accueil.css" type="text/css">
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+</head>
+
+<body>
+    <div class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="p-5 col-md-7 d-flex flex-column justify-content-center">
+                    <h3 class="display-4 mb-3">Bourse des Produits Chimiques</h3>
+                    <p class="mb-4 lead">Cette platform vous permettre si vous êtes un vrai utilisateur de connecter pour gérer des offres ou des demandes des produits chimiques avant leur date d'expiration et de bien négocier avec vos collegues dans differentes Laboratoires chimiques dans La Faculté des Sciences de Monastir pour affecter certains offres ou demandes.</p>
+                </div>
+                <div class="p-5 col-md-5">
+                    <h3 class="mb-3 text-center">Connectez-vous</h3>
+                    @using (Html.BeginForm("Autherize", "Accueil", FormMethod.Post))
+                    {
+                    <table>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Username)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Username)
+                            </td>
+                        </tr>
+                        <tr  class="spaceUnder">
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.Username)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Password)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Password)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+
+                            <td>
+                                <button type="submit" name="name" value="Login" class="btn mt-4 btn-block btn-outline-dark p-2"><i class="fa fa-fw fa-sign-in"></i><b contenteditable="true">Connecter</b></button>
+
+                            </td>
+                        </tr>
+                    </table>  
+                     }
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-6 p-3" style="	background-image: url(../../Desktop/sec_chimie.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;"></div>
+                <div class="col-lg-4 col-6 p-3">
+                    <h5>Contact</h5>
+                    <p>Département Chimique<br>La Faculté des Sciences de Monastir</p>
+                    <p>+216 -- --- ---</p>
+                    <p>+216 -- --- ---</p>
+                    <p>+216 -- --- ---</p>
+                    <p class="mb-0">azerty@azerty.com</p>
+                    <p class="mb-0">qwerty@qwazerty.com</p>
+                </div>
+                <div class="col-md-4 p-3">
+                    <h5>A propos</h5>
+                    <p class="mb-0"> Cette platform vous permettre si vous êtes un vrai utilisateur de connecter pour gérer des offres ou des demandes des produits chimiques avant leur date d'expiration et de bien négocier avec vos collegues dans differentes Laboratoires chimiques dans La Faculté des Sciences de Monastir pour affecter certains offres ou demandes.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0 mt-2">© 15-02-2019 GeeksDev.&nbsp;Tous les droits sont réservés</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

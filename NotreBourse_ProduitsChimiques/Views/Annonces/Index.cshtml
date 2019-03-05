@@ -1,0 +1,136 @@
+﻿@model IEnumerable<NotreBourse_ProduitsChimiques.Models.Annonce>
+
+@{
+    Layout = null;
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Accueil/Index");
+    }
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/Annonces.css" type="text/css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar6">
+                <a class="navbar-brand text-primary d-none d-md-block" href="#">
+                    <i class="fa d-inline fa-lg fa-circle"></i>
+                    <b> Bourse des Produits Chimiques</b>
+                </a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index","Annonces")">Annonces</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index","Produits")">Produits</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index","magasins")">Magasins</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Messages<br></a> </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("LogOut","Accueil")"><i class="fa fa-fw fa-sign-out"></i>Déconnecter</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="py-5" style="	background-attachment: fixed;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-right mb-5"><button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AjoutAnnonce", "Annonces") + "'");"><i class="fa fa-fw fa-plus"></i>Ajouter une Annonce</button></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <form class="form-inline">
+                        <div class="input-group w-100">
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Rechercher">
+                            <div class="input-group-append"><button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button></div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12 text-justify">
+                            <div class="btn-group">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Annonce</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Type</a><a class="dropdown-item" href="#">Etat</a><a class="dropdown-item" href="#">Date d'expiration</a><a class="dropdown-item" href="#">Type de Transaction</a>
+                                </div>
+                            </div>
+                            <div class="btn-group" style="">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Produit</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">ID</a><a class="dropdown-item" href="#">Label</a><a class="dropdown-item" href="#">CAS</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Quantité<br></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container">
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body m-3">
+                                            <h5 class="card-title"><b>Type : @Html.DisplayFor(modelItem => item.TypeAnnonce, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Etat :  @Html.DisplayFor(modelItem => item.EtatAnnonce, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Validité : @Html.DisplayFor(modelItem => item.Validite, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Type de Transaction :  @Html.DisplayFor(modelItem => item.TypeTransaction, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Produit : Alcool - xx-xx&nbsp;</b></h5>
+                                            <h5 class="card-title"><b>Date d'expiration : @Html.DisplayFor(modelItem => item.DateExpirationProduit, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Quantité :  @Html.DisplayFor(modelItem => item.Quantite, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            <h5 class="card-title"><b>Commentaire : @Html.DisplayFor(modelItem => item.Commentaires, new { htmlAttributes = new { @class = "card-title" } })</b></h5>
+                                            @Html.ActionLink("Modifier", "edit", new { idx = item.Id })
+                                            @Html.ActionLink("Supprimer", "DeleteAnnonce", new { idx = item.Id })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-6 p-3" style="	background-image: url(../../Desktop/sec_chimie.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;"></div>
+                <div class="col-lg-4 col-6 p-3">
+                    <h5>Contact</h5>
+                    <p>Département Chimique<br>La Faculté des Sciences de Monastir</p>
+                    <p>+216 -- --- ---</p>
+                    <p>+216 -- --- ---</p>
+                    <p>+216 -- --- ---</p>
+                    <p class="mb-0">azerty@azerty.com</p>
+                    <p class="mb-0">qwerty@qwerty.com</p>
+                </div>
+                <div class="col-md-4 p-3">
+                    <h5>A propos</h5>
+                    <p class="mb-0"> Cette platform vous permettre si vous êtes un vrai utilisateur de connecter pour gérer des offres ou des demandes des produits chimiques avant leur date d'expiration et de bien négocier avec vos collegues dans differentes Laboratoires chimiques dans La Faculté des Sciendes de Monastir pour affecter certains offres ou demandes.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0 mt-2">© 15-02-2019 GeeksDev.&nbsp;Tous les droits sont réservés</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>
